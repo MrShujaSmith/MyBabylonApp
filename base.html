@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Basic</title>
+        <!-- This 'style' stuff makes your HTML canvas full screen -->
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0%;
+                padding: 0%;
+            }
+
+            #myCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>  <!--  Loads the BabylonJS core libraries - incidentally, html comments are done like this   --> 
+    </head>
+
+    <body>
+    <!-- Creates an HTML canvas and gives it a name-->
+        <canvas id="myCanvas"></canvas>
+        <script>
+
+    // This bit connects to the webpage's 'canvas', gives it to the Babylon 'engine' and creates a Babylon 'scene'. You can have multiple scenes but I tend to just have one
+        var canvas = document.getElementById("myCanvas");
+        var engine = new BABYLON.Engine(canvas, true);
+        var scene = new BABYLON.Scene(engine);
+
+    // This creates an ArcRotateCamera and puts it into the scene
+        const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 3, new BABYLON.Vector3(0, 0, 0));
+        camera.attachControl(canvas, true);
+
+    // Some light
+        const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0));
+
+    // Here you can create whatever you can imagine - like a box!
+        const box = BABYLON.MeshBuilder.CreateBox("box", {});
+
+    // You need this bit to draw and refresh your creations
+         engine.runRenderLoop(function () {
+            scene.render();
+            // This bit allows the window to be resized - not essential but useful
+            window.addEventListener("resize", function () {
+                engine.resize();
+            });
+        });
+            
+        </script>
+    </body>
+</html>
+
