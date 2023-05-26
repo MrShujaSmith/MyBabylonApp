@@ -35,10 +35,18 @@
 
 
         const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 15, new BABYLON.Vector3(0, 0, 0));
+        
         camera.attachControl(canvas, true);
+        
         const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
+        
         BABYLON.SceneLoader.ImportMeshAsync("semi_house", "https://assets.babylonjs.com/meshes/", "both_houses_scene.babylon");
 
+        BABYLON.SceneLoader.ImportMeshAsync("", "/relative path/", "myFile").then((result) => {
+            result.meshes[1].position.x = 20;
+            const myMesh1 = scene.getMeshByName("myMesh_1");
+            myMesh1.rotation.y = Math.PI / 2;
+        });
 
 
 
